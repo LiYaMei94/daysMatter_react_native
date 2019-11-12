@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="blue">#F3F3F3</color>
+    <color name="StartTitle">#343434</color>
+    <color name="StartSubtitle">#585858</color>
+</resources>

@@ -1,0 +1,44 @@
+export const theme = {
+    themeColor:'#53CDFF',
+    pastTheme:'#4B4A50',
+    loading:'#666666',
+    bg:[
+        {
+            id:'0',
+           img:'http://hbimg.b0.upaiyun.com/741017cfd5867f0478c81985fcbe183cb71a0d9513f21-0tki1P_fw658'
+        },
+        {
+            id:'1',
+            img:'http://hbimg.b0.upaiyun.com/67e2956a9e28743b6d73bd47fafce6db84065f8f6395-h5aOnc_fw658'
+        },
+        {
+            id:'2',
+            img:'http://pic.616pic.com/bg_w1180/00/11/26/BL91HY1D6K.jpg'
+        },
+        {
+            id:'3',
+            img:'http://pic.616pic.com/bg_w1180/00/24/98/lF2rhQFG0q.jpg'
+        },
+        {
+            id:'4',
+            img:'http://hbimg.b0.upaiyun.com/10439ad3dc2ee28d6a39f924c85b45062322157386b9-ID8WDU_fw658'
+        },
+        {
+            id:'5',
+            img:'http://img.zcool.cn/community/016c8e565bd50632f8759647a7eba1.png'
+        },
+        {
+            id:'6',
+            img:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1562226100&di=035a4d1bd335951e24ec5a1572784c56&imgtype=jpg&er=1&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201405%2F14%2F20140514193952_GJV3f.thumb.600_0.jpeg'
+        },
+        {
+            id:'7',
+            img:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1562226172&di=a36d10c41c332bce3eb85fe95c9d0ac5&imgtype=jpg&er=1&src=http%3A%2F%2Fimg4.duitang.com%2Fuploads%2Fitem%2F201502%2F28%2F20150228214702_3PG2Q.thumb.224_0.jpeg'
+        },
+        {
+            id:'8',
+            img:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561631627684&di=6d8d9e77e1905ec57e657a53332fb8be&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F7f5f3d6059845906d252b45243e0d80c76103301c115-CwWNhl_fw236'
+        },
+    ],
+    
+};
