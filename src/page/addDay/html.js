@@ -242,10 +242,9 @@ class AddDaysScreen extends React.Component {
                 }
             })
         } else {
-            /*that.setState({
-                toastVisible:true,
-                message:'出错了，请重试'
-            })*/
+            that.setState({
+                confirmModalVisible:false
+            })
         }
     }
     //重复选择关闭打开

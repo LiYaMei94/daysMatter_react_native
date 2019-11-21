@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2019-10-23 14:39:12
- * @LastEditTime: 2019-11-04 14:20:44
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2019-11-21 18:36:31
+ * @LastEditors: liyamei
  * @Description: In User Settings Edit
  * @FilePath: /c:\Users\123\Desktop\react_native_appc:\Users\123\Desktop\weekend_exhibition\src\components\head_portraits.js
  */
@@ -14,7 +14,14 @@ import {
     Image,
     TouchableHighlight
 } from 'react-native';
+import PropTypes from 'prop-types';
 export default class HeadPortraits extends Component {
+	static propTypes = {
+		header_img:PropTypes.string,
+        width:PropTypes.number, 
+        height:PropTypes.number,
+        iconStyleFontSize:PropTypes.number,
+	}
     static defaultProps = {
         header_img:'',//头像地址
         width:50, //头像大小

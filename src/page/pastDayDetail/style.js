@@ -70,8 +70,10 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
-    baricon: {
-
+    barIcon: {
+		fontFamily:'iconfont',
+		fontSize:18,
+		color:'#999'
     },
     barText: {
         fontSize: 18,

@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TouchableHighlight, Text, ScrollView, Modal, Picker, FlatList, TouchableOpacity } from "react-native";
-
+import PropTypes from 'prop-types';
 export default class Repeat extends React.Component {
+	static propTypes = {
+		modalVisible:PropTypes.bool
+	}
+    static defaultProps = {
+		modalVisible:false
+    }
     constructor(props) {
         super(props);
         this.state = {

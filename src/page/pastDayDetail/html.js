@@ -7,8 +7,9 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import Swiper from 'react-native-swiper';
+import Swiper from '../../components/sSwiper';
 
+import {insert_sort} from '../../util';
 //引入主题配置文件
 import { theme } from '../../theme.js';
 import { swiper_index } from '../../redux/actions/GetDayAction.js';
@@ -28,7 +29,7 @@ class PastDayDetail extends React.Component {
         headerTintColor: '#fff',
         headerRight: (
             <TouchableHighlight
-                onPress={() => navigation.state.params.navigatePress()}
+                onPress={() =>  navigation.push('AddDay', {id: navigation.getParam('id', '-1')})}
 
                 underlayColor='rgba(0,0,0,0.2)'
                 style={styles.headerRightButtonBox}
@@ -43,14 +44,10 @@ class PastDayDetail extends React.Component {
         this.state = {
             dayID: props.navigation.getParam('id', '-1'),
             daysData: [],
-            detailInfo: {},
             modalVisible: false,
             swiperIndex: 0,
             loaded: false,//是否加载完成
         }
-        headerStyle =
-            this.deleteday = this.deleteday.bind(this);
-        this.go_detail = this.go_detail.bind(this);
     }
     componentDidMount() {
         const that = this;
@@ -58,7 +55,6 @@ class PastDayDetail extends React.Component {
         if (dayID != '-1') {
             that.showDetail();
         }
-        that.props.navigation.setParams({ navigatePress: that.go_detail });
     }
     UNSAFE_componentWillReceiveProps(nextProps) {
         let data = [];
@@ -75,13 +71,7 @@ class PastDayDetail extends React.Component {
             }
         }
     }
-    go_detail() {
-        const { navigation } = this.props;
-        const { dayID } = this.state;
-        navigation.push('AddDay', {
-            id: dayID
-        })
-    }
+    
     //编辑时的信息
     showDetail() {
         let data = {};
@@ -91,14 +81,13 @@ class PastDayDetail extends React.Component {
         _fileEx(fileName, function (res) {
             if (res) {
                 _readFile(fileName, function (res) {
-                    data = JSON.parse(res);
+                    data = insert_sort(JSON.parse(res));
                     for (let i = 0; i < data.length; i++) {
                         if (data[i].id == dayID) {
                             swiperIndex = i;
                         }
                     }
                     that.setState({
-                        detailInfo: data[dayID],
                         daysData: data,
                         swiperIndex: swiperIndex,
                         loaded: true,//是否加载完成
@@ -114,25 +103,8 @@ class PastDayDetail extends React.Component {
         that.setState({
             modalVisible: true,
         })
-    }
-    updateRedux(text, arr) {
-        const { dispatch, navigation } = this.props;
-        const that = this;
-        _deleteFile(fileName, function (res) {
-            if (res == 1) {
-                _writeFile(fileName, JSON.stringify(arr), function () {
-                    if (res == 1) {
-                        navigation.push('bottomTabNavigator');
-                    } else {
-
-                    }
-                })
-            } else {
-
-            }
-        })
-    }
-    //确认框关闭打开
+	}
+	//确认框关闭打开
     onCloseModal(value) {
         const that = this;
         const { dayID } = this.state;
@@ -141,8 +113,8 @@ class PastDayDetail extends React.Component {
                 if (res) {
                     _readFile(fileName, function (res) {
                         data = JSON.parse(res);
-                        for (let i = 0; i < data.length; i++) {
-                            if (data[i].id == dayID) {
+                        for(let i=0;i<data.length;i++){
+                            if(data[i].id==dayID){
                                 data.splice(i, 1);
                                 that.updateRedux('delete', data);
                             }
@@ -153,13 +125,40 @@ class PastDayDetail extends React.Component {
                 }
             })
         } else {
-
+            that.setState({
+                modalVisible:false
+            })
         }
     }
+    updateRedux(text, arr) {
+		const { dispatch, navigation } = this.props;
+		const {dayID}=this.state;
+        const that = this;
+        _deleteFile(fileName, function (res) {
+            if (res == 1) {
+                _writeFile(fileName, JSON.stringify(arr), function () {
+                    if (res == 1) {
+                        _readFile(fileName, function (res) {
+							data = insert_sort(JSON.parse(res));
+							that.setState({
+								daysData: data,
+								modalVisible:false,
+							})
+						})
+                    } else {
+
+                    }
+                })
+            } else {
+
+            }
+        })
+    }
+    
 
     render() {
         const { navigation, dispatch } = this.props;
-        const { detailInfo, modalVisible, daysData, swiperIndex, loaded } = this.state;
+        const { modalVisible, daysData, swiperIndex, loaded } = this.state;
         return (
             loaded ?
                 <View style={styles.container}>
@@ -191,19 +190,19 @@ class PastDayDetail extends React.Component {
                                             <View style={[styles.bottomBar, styles.inlineBlock]}>
                                                 <TouchableHighlight onPress={() => navigation.push('bottomTabNavigator')} underlayColor='rgba(0,0,0,0.2)' style={styles.barItem}>
                                                     <View style={[styles.barItemBox, styles.inlineBlock]}>
-                                                        <Entypo style={styles.baricon} name='list' size={25} color="#999999"></Entypo>
+                                                        <Text style={styles.barIcon}>{'\ue618'}</Text>
                                                         <Text style={styles.barText}>列表</Text>
                                                     </View>
                                                 </TouchableHighlight>
                                                 <TouchableHighlight onPress={() => navigation.push('AddDay')} underlayColor='rgba(0,0,0,0.2)' style={styles.barItem}>
                                                     <View style={[styles.barItemBox, styles.inlineBlock]}>
-                                                        <Entypo style={styles.baricon} name='add-to-list' size={25} color="#999999"></Entypo>
+														<Text style={styles.barIcon}>{'\ue654'}</Text>
                                                         <Text style={styles.barText}>新增</Text>
                                                     </View>
                                                 </TouchableHighlight>
                                                 <TouchableHighlight onPress={() => this.deleteday()} underlayColor='rgba(0,0,0,0.2)' style={styles.barItem}>
                                                     <View style={[styles.barItemBox, styles.inlineBlock]}>
-                                                        <AntDesign style={styles.baricon} name='delete' size={25} color="#999999"></AntDesign>
+														<Text style={styles.barIcon}>{'\ue656'}</Text>
                                                         <Text style={styles.barText}>删除</Text>
                                                     </View>
                                                 </TouchableHighlight>

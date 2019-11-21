@@ -2,8 +2,8 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-09-30 15:47:35
- * @LastEditTime: 2019-11-12 14:33:39
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2019-11-21 18:04:27
+ * @LastEditors: liyamei
  */
 
 
@@ -29,7 +29,8 @@ export default class App extends React.Component {
             'Warning: componentWillMount is deprecated',
             'Warning: componentWillReceiveProps is deprecated',
             'Warning: componentWillMount has been renamed',
-            'Warning: componentWillReceiveProps has been renamed',
+			'Warning: componentWillReceiveProps has been renamed',
+			'Warning: componentWillUpdate  has been renamed',
             'Warning: DatePickerAndroid has been merged with DatePickerIOS and will be removed in a future release',
         ]);
     }
